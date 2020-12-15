@@ -3,7 +3,7 @@
     xmlns="http://www.phonegap.com/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="cordova-plugin-ble-central"
-    version="1.2.4">
+    version="1.3.1">
 
     <name>BLE</name>
     <description>Bluetooth Low Energy (BLE) Central Plugin</description>
@@ -19,9 +19,10 @@
 
     <platform name="ios">
 
+        <preference name="IOS_INIT_ON_LOAD" default="true" />
         <config-file target="config.xml" parent="/widget">
             <feature name="BLE">
-                <param name="ios-package" value="BLECentralPlugin" onload="true"/>
+                <param name="ios-package" value="BLECentralPlugin" onload="$IOS_INIT_ON_LOAD"/>
             </feature>
         </config-file>
 
@@ -40,7 +41,7 @@
 
         <hook type="before_plugin_install" src="hooks/ios_pod_extra_settings.js" />
 
-        <!-- iOS SPermissions -->
+        <!-- iOS Permissions -->
         <preference name="BLUETOOTH_USAGE_DESCRIPTION" default=" " />
         <config-file target="*-Info.plist" parent="NSBluetoothPeripheralUsageDescription">
             <string>$BLUETOOTH_USAGE_DESCRIPTION</string>
@@ -58,7 +59,9 @@
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/manifest">
-            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
             <uses-permission android:name="android.permission.BLUETOOTH"/>
             <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
         </config-file>
