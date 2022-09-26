@@ -524,7 +524,10 @@
         dfuCallbackId = [command.callbackId copy];
 
         // create firmware object from URL
-        DFUFirmware *firmware = [[DFUFirmware alloc] initWithUrlToZipFile:url];
+        NSError *anyError;
+
+        // create firmware object from URL
+        DFUFirmware *firmware = [[DFUFirmware alloc] initWithUrlToZipFile:url  error: &anyError];
 
         // fail in case of invalid firmware
         if (firmware == nil || !firmware.valid) {
